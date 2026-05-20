@@ -52,9 +52,6 @@ export default function ExploreNavbar() {
             />
           )}
           <span>Join the club</span>
-          <div className="bg-black text-white w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center font-bold text-[10px] sm:text-xs shrink-0 shadow-sm">
-            5
-          </div>
         </button>
       </div>
     </nav>
