@@ -37,7 +37,7 @@ export default function HeroSection() {
   const scaleArtwork = useTransform(
     scrollYProgress, 
     [0, 1], 
-    isMobile ? [1.1, 0.75] : [1, 1.05]
+    isMobile ? [1.0, 0.7] : [1, 1.05]
   );
 
   const opacityArtwork = useTransform(
