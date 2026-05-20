@@ -108,7 +108,7 @@ export default function HeroSection() {
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="relative flex items-center justify-center w-full h-full -translate-y-[8vh] lg:translate-y-0"
+          className="relative flex items-center justify-center w-full h-full -translate-y-[12vh] lg:translate-y-0"
         >
           <Image
             src="/1.png"
