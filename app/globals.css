@@ -150,6 +150,14 @@
     animation: pulse-shadow 4s ease-in-out infinite;
     will-change: transform, opacity;
   }
+  @keyframes preloader-idle {
+    0%, 100% { transform: scale(1) rotate(0deg) translateY(0); }
+    50% { transform: scale(1.03) rotate(1deg) translateY(-2px); }
+  }
+  .animate-preloader-idle {
+    animation: preloader-idle 4s ease-in-out infinite;
+    will-change: transform;
+  }
 
   /* Explore Route Utilities */
   .explore-theme {
