@@ -113,6 +113,15 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Explore Route Variables */
+  --font-serif: var(--font-playfair);
+  --color-antique-gold: #c5a059;
+  --color-maroon: #800000;
+  --color-muted-bronze: #a97142;
+  --color-burnt-orange: #cc5500;
+  --color-emerald: #50c878;
+  --color-turquoise: #40e0d0;
 }
 
 @layer base {
@@ -121,5 +130,81 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  @keyframes bounce-potato {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-35px); }
+  }
+  @keyframes pulse-shadow {
+    0%, 100% { transform: scale(1); opacity: 0.35; }
+    50% { transform: scale(0.75); opacity: 0.15; }
+  }
+  .animate-bounce-potato {
+    animation: bounce-potato 4s ease-in-out infinite;
+    will-change: transform;
+  }
+  .animate-pulse-shadow {
+    animation: pulse-shadow 4s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  /* Explore Route Utilities */
+  .explore-theme {
+    --background: #F3EBE1; /* Vintage cream paper */
+    --foreground: #1A1A1A; /* Deep charcoal/off-black for print-like contrast */
+  }
+
+  /* Hide scrollbar for Lenis smooth scrolling */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+
+  .gpu-accelerated {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+  .text-glow {
+    text-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+  }
+  .ink-bleed {
+    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.4), -0.5px -0.5px 2px rgba(0,0,0,0.1);
+    -webkit-font-smoothing: antialiased;
+  }
+  .film-grade {
+    filter: sepia(0.25) saturate(1.2) contrast(1.1) brightness(0.95) hue-rotate(-2deg);
+  }
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  }
+  .bg-halftone {
+    background-image: radial-gradient(rgba(0,0,0,0.15) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+
+  @keyframes film-flicker {
+    0% { opacity: 1; }
+    25% { opacity: 0.95; transform: translateY(0.5px); }
+    50% { opacity: 0.98; transform: translateY(-0.5px); }
+    75% { opacity: 0.92; transform: translateY(0.5px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .hover-flicker:hover {
+    animation: film-flicker 0.2s infinite;
   }
 }
