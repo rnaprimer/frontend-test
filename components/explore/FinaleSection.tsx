@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 
 export default function FinaleSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,9 +34,11 @@ export default function FinaleSection() {
           willChange: 'transform'
         }}
       >
-        <img
+        <Image
           src="/2.png"
           alt="PotatoBae Grandpa"
+          width={2000}
+          height={2000}
           className="film-grade relative w-full h-[85vh] object-cover object-bottom scale-[1.25] lg:scale-100 lg:w-[120vw] lg:h-auto lg:object-contain lg:max-w-none lg:object-bottom"
           style={{
             background: 'transparent',

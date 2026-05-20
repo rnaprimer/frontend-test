@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 
 export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
@@ -82,9 +83,12 @@ export default function HeroSection() {
           }}
           className="relative flex items-center justify-center w-full h-full -translate-y-[8vh] lg:translate-y-0"
         >
-          <img
+          <Image
             src="/1.png"
             alt="PotatoBae Grandmother"
+            width={2000}
+            height={2000}
+            priority
             className="film-grade relative w-full h-[85vh] object-cover object-[center_80%] scale-[1.25] lg:scale-100 lg:w-[120vw] lg:h-auto lg:object-contain lg:max-w-none"
             style={{
               background: 'transparent',

@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 
 const slides = [
   {
@@ -67,9 +68,11 @@ export default function HorizontalGallery() {
 
                   {/* Image Layer (In front of the frame) */}
                   <div className="absolute inset-0 flex items-end justify-center z-20 pointer-events-none pb-[5vh]">
-                    <img
+                    <Image
                       src={slide.imageSrc}
-                      alt={slide.title}
+                      alt={slide.title || "Gallery Image"}
+                      width={1200}
+                      height={1600}
                       className="film-grade object-contain w-full h-[85vh]"
                       style={{
                         maxWidth: 'none',
@@ -168,9 +171,11 @@ function MobileStickySlide({
 
       {/* Highly compact, scaled up image layer */}
       <div className="relative z-20 w-full flex items-center justify-center pointer-events-none px-4 py-10 md:px-8 md:py-14">
-        <img
+        <Image
           src={slide.imageSrc}
-          alt={slide.title}
+          alt={slide.title || "Gallery Image"}
+          width={800}
+          height={1200}
           className="film-grade object-contain w-full max-w-[100%] md:max-w-[90%] h-auto drop-shadow-sm scale-[1.18] md:scale-[1.12]"
           style={{
             transform: 'translate3d(0,0,0)',
