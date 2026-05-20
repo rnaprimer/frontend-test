@@ -6,10 +6,19 @@ import Image from 'next/image';
 
 export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
+    
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -17,8 +26,25 @@ export default function HeroSection() {
     offset: ['start start', 'end start'],
   });
 
-  const yArtwork = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const scaleArtwork = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
+  // Mobile: subtle parallax, zoom-out (1.1 -> 0.75), and fade-out
+  // Desktop: standard parallax, subtle zoom-in
+  const yArtwork = useTransform(
+    scrollYProgress, 
+    [0, 1], 
+    isMobile ? [0, 60] : [0, 150]
+  );
+  
+  const scaleArtwork = useTransform(
+    scrollYProgress, 
+    [0, 1], 
+    isMobile ? [1.1, 0.75] : [1, 1.05]
+  );
+
+  const opacityArtwork = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 0.8] : [0, 1],
+    isMobile ? [1, 0] : [1, 1]
+  );
 
   return (
     <section
@@ -68,7 +94,8 @@ export default function HeroSection() {
         style={{
           y: yArtwork,
           scale: scaleArtwork,
-          willChange: 'transform'
+          opacity: opacityArtwork,
+          willChange: 'transform, opacity'
         }}
       >
         {/* Inner wrapper for continuous floating motion */}
