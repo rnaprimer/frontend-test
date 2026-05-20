@@ -1,20 +1,58 @@
-import Link from 'next/link';
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function ExploreNavbar() {
+  const [activeTab, setActiveTab] = useState<'goback' | 'join'>('join');
+  const router = useRouter();
+
+  const handleGoBack = () => {
+    setActiveTab('goback');
+    // Allow the fluid animation to play for a brief moment before navigating
+    setTimeout(() => {
+      router.push('/');
+    }, 250); 
+  };
+
+  const handleJoin = () => {
+    setActiveTab('join');
+  };
+
   return (
-    <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-50">
-      <div className="bg-white rounded-full p-2 flex items-center gap-2 shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-100">
-        <Link 
-          href="/" 
-          className="px-6 py-3 font-semibold text-black hover:opacity-70 transition-opacity rounded-full whitespace-nowrap"
-        >
-          Go back
-        </Link>
+    <nav className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[95vw]">
+      <div className="bg-white rounded-full p-1 sm:p-1.5 flex items-center shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-100/50 backdrop-blur-sm">
+        
+        {/* Go Back Button */}
         <button 
-          className="bg-[#c4f092] hover:bg-[#b6e87f] transition-colors rounded-full pl-6 pr-2 py-2 flex items-center gap-4 text-black font-semibold whitespace-nowrap"
+          onClick={handleGoBack}
+          className="relative rounded-full px-5 sm:px-6 py-2 sm:py-2.5 flex items-center justify-center font-semibold text-xs sm:text-sm text-black whitespace-nowrap z-10 outline-none select-none transition-opacity hover:opacity-80 active:opacity-60"
         >
+          {activeTab === 'goback' && (
+            <motion.div
+              layoutId="explore-nav-pill"
+              className="absolute inset-0 bg-[#c4f092] rounded-full -z-10"
+              transition={{ type: "spring", stiffness: 500, damping: 35 }}
+            />
+          )}
+          Go back
+        </button>
+
+        {/* Join the club Button */}
+        <button 
+          onClick={handleJoin}
+          className="relative rounded-full pl-5 sm:pl-6 pr-1.5 sm:pr-2 py-1.5 sm:py-1.5 flex items-center gap-3 sm:gap-4 font-semibold text-xs sm:text-sm text-black whitespace-nowrap z-10 outline-none select-none transition-opacity hover:opacity-80 active:opacity-60"
+        >
+          {activeTab === 'join' && (
+            <motion.div
+              layoutId="explore-nav-pill"
+              className="absolute inset-0 bg-[#c4f092] rounded-full -z-10"
+              transition={{ type: "spring", stiffness: 500, damping: 35 }}
+            />
+          )}
           <span>Join the club</span>
-          <div className="bg-black text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+          <div className="bg-black text-white w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center font-bold text-[10px] sm:text-xs shrink-0 shadow-sm">
             5
           </div>
         </button>
