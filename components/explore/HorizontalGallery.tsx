@@ -114,7 +114,7 @@ export default function HorizontalGallery() {
       {/* MOBILE & TABLET: Sticky Vertical Slides (<1024px) */}
       <section 
         ref={mobileRef} 
-        className="relative w-full bg-[var(--background)] lg:hidden z-40 pb-[5vh] overflow-x-hidden max-w-full [--card-top-offset:56px] [--card-stack-gap:16px] sm:[--card-top-offset:80px] md:[--card-top-offset:128px] md:[--card-stack-gap:28px]"
+        className="relative w-full bg-[var(--background)] lg:hidden z-40 pb-[30vh] overflow-x-clip max-w-full [--card-top-offset:56px] [--card-stack-gap:16px] sm:[--card-top-offset:80px] md:[--card-top-offset:128px] md:[--card-stack-gap:28px]"
       >
         {slides.map((slide, index) => {
           return (
