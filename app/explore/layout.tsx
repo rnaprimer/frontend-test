@@ -17,7 +17,7 @@ export default function ExploreLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`explore-theme ${inter.variable} ${playfair.variable} antialiased min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[#111] selection:text-[#F3EBE1]`}>
+    <div className={`explore-theme ${inter.variable} ${playfair.variable} antialiased min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[#111] selection:text-[#FFFFFF]`}>
       {/* Global Vintage Texture System */}
       <div className="fixed inset-0 pointer-events-none z-[9999]">
         <div className="absolute inset-0 bg-noise opacity-[0.06] mix-blend-multiply"></div>
