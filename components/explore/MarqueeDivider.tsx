@@ -28,7 +28,7 @@ export default function MarqueeDivider() {
   const skewX = useTransform(smoothVelocity, [-1000, 1000], [5, -5]);
 
   return (
-    <div className="relative z-[100] w-[100vw] overflow-hidden bg-[#d8ff65] mix-blend-multiply flex items-center py-2 border-y border-[#d8ff65]/50 shadow-[0_0_20px_rgba(216,255,101,0.3)]">
+    <div className="relative z-[100] w-[100vw] overflow-hidden bg-[#d8ff65] mix-blend-multiply flex items-center py-2 border-y border-[#d8ff65]/50 shadow-[0_0_20px_rgba(216,255,101,0.3)] -mt-[16vh] lg:mt-0">
       {/* 
         Container with double the content to allow seamless wrapping.
         Each span takes up exactly 50% of the total width.
