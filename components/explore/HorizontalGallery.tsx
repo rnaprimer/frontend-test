@@ -3,26 +3,36 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import { useIsMobile } from '@/components/ui/use-mobile';
 
 const slides = [
   {
     id: 1,
-    title: '',
-    subtitle: '',
+    number: '01',
+    title: 'THE ORIGIN',
+    subtitle: 'ROOTED IN HISTORY',
+    description: 'Harvested from the finest volcanic soil, crafted for eternal prestige.',
+    tags: ['Classic', 'Heritage'],
     bgClass: 'bg-[var(--color-muted-bronze)]',
     imageSrc: '/3.png',
   },
   {
     id: 2,
-    title: '',
-    subtitle: '',
+    number: '02',
+    title: 'THE CRAFT',
+    subtitle: 'SCULPTED BY NATURE',
+    description: 'Each curve and texture holds a story of pure geological perfection.',
+    tags: ['Sculpted', 'Prestige'],
     bgClass: 'bg-[var(--color-antique-gold)]',
     imageSrc: '/4.png',
   },
   {
     id: 3,
-    title: '',
-    subtitle: '',
+    number: '03',
+    title: 'THE LEGACY',
+    subtitle: 'BEYOND TIME',
+    description: 'A timeless artifact that transcends generations and digital spaces.',
+    tags: ['Artifact', 'Legend'],
     bgClass: 'bg-[var(--color-maroon)]',
     imageSrc: '/5.png',
   },
@@ -102,7 +112,10 @@ export default function HorizontalGallery() {
       </section>
 
       {/* MOBILE & TABLET: Sticky Vertical Slides (<1024px) */}
-      <section ref={mobileRef} className="relative w-full bg-[var(--background)] lg:hidden z-40 pb-[5vh]">
+      <section 
+        ref={mobileRef} 
+        className="relative w-full bg-[var(--background)] lg:hidden z-40 pb-[5vh] overflow-x-hidden max-w-full [--card-top-offset:56px] [--card-stack-gap:16px] sm:[--card-top-offset:80px] md:[--card-top-offset:128px] md:[--card-stack-gap:28px]"
+      >
         {slides.map((slide, index) => {
           return (
             <MobileStickySlide 
@@ -131,19 +144,47 @@ function MobileStickySlide({
   total: number, 
   scrollYProgress: any 
 }) {
+  const isMobile = useIsMobile();
+  
+  // Dynamic scale ranges matching:
+  // Mobile: Card 1 -> 1 to 0.985 to 0.97; Card 2 -> 1 to 0.985; Card 3 -> 1.
+  // Desktop/Tablet: Card 1 -> 1 to 0.97 to 0.94; Card 2 -> 1 to 0.97; Card 3 -> 1.
+  const scaleStep = isMobile ? 0.015 : 0.03;
+  const maxStackOnTop = total - 1 - index;
+  
+  const inputRange: number[] = [];
+  const outputRange: number[] = [];
+  
+  for (let k = 0; k <= total; k++) {
+    const val = k / total;
+    inputRange.push(val);
+    if (k <= index) {
+      outputRange.push(1);
+    } else {
+      const stackedCount = Math.min(k - index, maxStackOnTop);
+      outputRange.push(1 - stackedCount * scaleStep);
+    }
+  }
+
+  const scale = useTransform(scrollYProgress, inputRange, outputRange, { clamp: true });
+
   const start = index / total;
   const end = (index + 1) / total;
+  const yOffset = useTransform(scrollYProgress, [start, end], [0, -20], { clamp: true });
   
-  const scale = useTransform(scrollYProgress, [start, end], [1, 0.98], { clamp: true });
-  const yOffset = useTransform(scrollYProgress, [start, end], ['0px', '-20px'], { clamp: true });
-  // Subtle depth hint instead of heavy blackout
-  const shadowOpacity = useTransform(scrollYProgress, [start, end], [0, 0.12], { clamp: true });
+  const isLast = index === total - 1;
+  const shadowOpacity = useTransform(
+    scrollYProgress, 
+    [start, end], 
+    [0, isLast ? 0 : 0.12], 
+    { clamp: true }
+  );
 
   return (
     <motion.div
-      className={`sticky w-full flex flex-col items-center justify-center overflow-hidden bg-[var(--background)] shadow-[0_-20px_30px_-15px_rgba(0,0,0,0.12)] origin-top will-change-transform rounded-[32px] ${index > 0 ? '-mt-[10vh]' : 'mt-[2vh]'}`}
+      className={`sticky w-full flex flex-col justify-between md:grid md:grid-cols-[40%_60%] gap-6 md:gap-12 items-stretch md:items-center overflow-hidden bg-[var(--background)] border border-[#111]/5 shadow-[0_-20px_30px_-15px_rgba(0,0,0,0.12)] origin-top will-change-transform transform-gpu rounded-[32px] p-6 sm:p-8 md:p-12 h-[72vh] sm:h-[78vh] md:h-[85vh] min-h-[460px] sm:min-h-[540px] md:min-h-[620px] max-h-[600px] sm:max-h-[680px] md:max-h-[760px] max-w-full ${index > 0 ? '-mt-[10vh]' : 'mt-[2vh]'}`}
       style={{ 
-        top: `calc(8vh + ${index * 20}vh)`,
+        top: `calc(var(--card-top-offset, 56px) + ${index} * var(--card-stack-gap, 16px))`,
         scale, 
         y: yOffset,
         zIndex: index + 10 
@@ -159,39 +200,48 @@ function MobileStickySlide({
       <div className="absolute top-4 left-5 text-[#111] text-[10px] opacity-20 font-mono pointer-events-none">+</div>
       <div className="absolute bottom-4 right-5 text-[#111] text-[10px] opacity-20 font-mono pointer-events-none">+</div>
 
-      {/* Encodaged Overlay Text */}
-      <div className="absolute inset-0 z-0 flex flex-col items-center justify-center pointer-events-none -mt-8">
-        <h2 
-          className="ink-bleed font-serif text-[#111] opacity-[0.06] mix-blend-multiply tracking-tighter text-center px-2 whitespace-nowrap"
-          style={{ fontSize: 'clamp(4.5rem, 20vw, 10rem)', lineHeight: '0.9' }}
-        >
+      {/* Left side: Project Info */}
+      <div className="relative z-20 flex flex-col justify-center pr-0 md:pr-8 select-none">
+        {/* Project Number */}
+        <div className="text-[18vw] sm:text-[14vw] md:text-[10vw] font-serif font-bold text-[#111]/10 leading-none tracking-tighter -mb-3 md:-mb-5">
+          {slide.number}
+        </div>
+        
+        {/* Project Title */}
+        <h3 className="text-lg sm:text-2xl md:text-4xl font-serif font-extrabold text-[#111] tracking-tight uppercase mb-2 sm:mb-3">
           {slide.title}
-        </h2>
+        </h3>
+        
+        {/* Project Description */}
+        <p className="text-xs sm:text-sm md:text-base text-[#111]/70 font-sans font-light leading-relaxed mb-4 sm:mb-6 max-w-md">
+          {slide.description}
+        </p>
+
+        {/* Buttons / Tags */}
+        <div className="flex flex-wrap gap-3">
+          {slide.tags.map((tag, tagIndex) => (
+            <span 
+              key={tagIndex} 
+              className="px-5 py-2 text-xs sm:text-sm font-sans font-semibold uppercase tracking-wider text-[#111] bg-white border border-[#111]/15 rounded-full shadow-sm hover:bg-[#111] hover:text-white transition-colors duration-300 cursor-pointer whitespace-nowrap"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
 
-      {/* Highly compact, scaled up image layer */}
-      <div className="relative z-20 w-full flex items-center justify-center pointer-events-none px-4 py-10 md:px-8 md:py-14">
+      {/* Right side: Project Image */}
+      <div className="relative z-20 flex items-center justify-center w-full mt-4 sm:mt-6 md:mt-0">
         <Image
           src={slide.imageSrc}
           alt={slide.title || "Gallery Image"}
           width={800}
           height={1200}
-          className="film-grade object-contain w-full max-w-[100%] md:max-w-[90%] h-auto drop-shadow-sm scale-[1.18] md:scale-[1.12]"
+          className="film-grade object-contain w-full h-[180px] sm:h-[220px] md:h-auto max-h-[25vh] sm:max-h-[30vh] md:max-h-[55vh] drop-shadow-sm scale-[1.05] md:scale-[1.12]"
           style={{
             transform: 'translate3d(0,0,0)',
-            maxHeight: '55vh'
           }}
         />
-      </div>
-
-      {/* Refined compact subtitle */}
-      <div className="absolute z-20 bottom-5 md:bottom-8 text-center pointer-events-none w-full">
-        <p 
-          className="text-[#111] font-sans font-medium uppercase opacity-80"
-          style={{ fontSize: 'clamp(0.8rem, 2.2vw, 1.2rem)', letterSpacing: '0.4em' }}
-        >
-          {slide.subtitle}
-        </p>
       </div>
     </motion.div>
   );
