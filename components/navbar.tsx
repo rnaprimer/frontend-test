@@ -22,13 +22,13 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-[100] flex items-center justify-between px-6 md:px-12 py-6 bg-transparent">
+      <nav className="fixed top-0 left-0 w-full z-[100] flex items-center justify-between px-4 md:px-8 py-3.5 bg-transparent">
         {/* Left side: Logo */}
         <div className="flex items-center gap-3 relative z-[101]">
           {/* Custom Logo replicating the uploaded image */}
           <svg
             viewBox="0 0 100 100"
-            className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0"
+            className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0"
             xmlns="http://www.w3.org/2000/svg"
           >
             {/* Black tilted oval, dynamically inverts when menu opens */}
@@ -54,7 +54,7 @@ export function Navbar() {
               <path d="M28 70 Q50 50 70 30" />
             </g>
           </svg>
-          <span className={`font-bold text-lg md:text-2xl tracking-tight transition-colors duration-500 ${isOpen ? 'text-white' : 'text-black'}`}>
+          <span className={`font-bold text-base md:text-xl tracking-tight transition-colors duration-500 ${isOpen ? 'text-white' : 'text-black'}`}>
             POTATOBAE
           </span>
         </div>
