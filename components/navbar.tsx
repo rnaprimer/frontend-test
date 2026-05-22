@@ -68,7 +68,7 @@ export function Navbar() {
             EXPLORE
           </Link>
           <Link
-            href="#"
+            href="/club"
             className="text-black font-bold text-sm md:text-base tracking-wider hover:opacity-70 transition-opacity"
           >
             JOIN THE CLUB
@@ -120,7 +120,7 @@ export function Navbar() {
                 transition={{ delay: 0.3, duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
               >
                 <Link
-                  href="#"
+                  href="/club"
                   onClick={() => setIsOpen(false)}
                   className="text-[#f3ebe1] text-5xl font-serif tracking-wider hover:text-[#d8ff65] transition-colors whitespace-nowrap"
                 >
