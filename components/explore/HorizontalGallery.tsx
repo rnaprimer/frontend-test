@@ -237,7 +237,7 @@ function MobileStickySlide({
           alt={slide.title || "Gallery Image"}
           width={800}
           height={1200}
-          className="film-grade object-contain w-full h-[180px] sm:h-[220px] md:h-auto max-h-[25vh] sm:max-h-[30vh] md:max-h-[55vh] drop-shadow-sm scale-[1.05] sm:scale-[1.1] md:scale-[1.12] overflow-visible"
+          className="film-grade object-contain w-full h-[180px] sm:h-[220px] md:h-auto max-h-[25vh] sm:max-h-[30vh] md:max-h-[55vh] drop-shadow-sm scale-[1.20] sm:scale-[1.22] md:scale-[1.18] overflow-visible"
           style={{
             transform: 'translate3d(0,0,0)',
           }}
