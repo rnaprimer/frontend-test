@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 export default function ExploreNavbar() {
-  const [activeTab, setActiveTab] = useState<'goback' | 'join'>('join');
+  const [activeTab, setActiveTab] = useState<'goback' | 'explore'>('explore');
   const router = useRouter();
 
   const handleGoBack = () => {
@@ -16,8 +16,8 @@ export default function ExploreNavbar() {
     }, 250); 
   };
 
-  const handleJoin = () => {
-    setActiveTab('join');
+  const handleExplore = () => {
+    setActiveTab('explore');
   };
 
   return (
@@ -39,21 +39,22 @@ export default function ExploreNavbar() {
           Go back
         </button>
 
-        {/* Join the club Button */}
+        {/* Explore Button */}
         <button 
-          onClick={handleJoin}
+          onClick={handleExplore}
           className="relative rounded-full pl-5 sm:pl-6 pr-1.5 sm:pr-2 py-1.5 sm:py-1.5 flex items-center gap-3 sm:gap-4 font-semibold text-xs sm:text-sm text-black whitespace-nowrap z-10 outline-none select-none transition-opacity hover:opacity-80 active:opacity-60"
         >
-          {activeTab === 'join' && (
+          {activeTab === 'explore' && (
             <motion.div
               layoutId="explore-nav-pill"
               className="absolute inset-0 bg-[#c4f092] rounded-full -z-10"
               transition={{ type: "spring", stiffness: 500, damping: 35 }}
             />
           )}
-          <span>Join the club</span>
+          <span>Explore</span>
         </button>
       </div>
     </nav>
   );
 }
+
