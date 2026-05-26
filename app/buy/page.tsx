@@ -72,7 +72,7 @@ export default function BuyPage() {
       </div>
 
       {/* Right Side - Buy Button */}
-      <div className="flex-1 lg:flex-[0.8] flex flex-col items-center justify-center p-4 mt-8 md:mt-0">
+      <div className="flex-1 lg:flex-[0.8] flex flex-col items-center justify-center p-4 mt-8 md:mt-0 md:-translate-x-12 lg:-translate-x-24">
         <button
           onClick={handlePayment}
           disabled={loading}
