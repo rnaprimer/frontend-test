@@ -46,13 +46,13 @@ export default function BuyPage() {
   };
 
   return (
-    <main className="w-full min-h-[100dvh] bg-white flex flex-col md:flex-row items-center justify-center p-8 overflow-hidden">
+    <main className="w-full h-[100dvh] bg-white flex flex-col md:flex-row items-center justify-center p-8 overflow-hidden">
       <ExploreNavbar />
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
 
       {/* Left Side - Image Showcase */}
       <div className="flex-[1.2] lg:flex-[1.5] flex items-center justify-center w-full h-full p-4 relative">
-        <div className="relative w-[110%] md:w-full max-w-[1000px] aspect-square scale-[1.15] md:scale-110 lg:scale-125 mt-16 md:mt-0 -ml-[5%] md:ml-0">
+        <div className="relative w-[110%] md:w-[90%] max-w-[800px] aspect-square scale-[1.15] md:scale-100 lg:scale-100 mt-16 md:mt-0 -ml-[5%] md:ml-0">
           <Image
             src="/buy.webp"
             alt="Potato Buy"
