@@ -77,9 +77,9 @@ export default function BuyPage() {
           onClick={handlePayment}
           disabled={loading}
           className={`
-            relative group w-full max-w-[180px] sm:max-w-[280px] py-3 sm:py-5
+            relative group w-full max-w-[220px] sm:max-w-[280px] py-4 sm:py-5
             bg-[#b4ff29] border-[3px] border-black rounded-full
-            text-black font-black text-base sm:text-2xl tracking-wide
+            text-black font-black text-sm sm:text-2xl tracking-widest
             shadow-[0px_6px_0px_0px_rgba(0,0,0,1)]
             transition-all duration-150 ease-in-out
             ${loading ? 'opacity-70 cursor-not-allowed shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] translate-y-[3px]' : 'active:translate-y-[6px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:bg-[#a5f319]'}
