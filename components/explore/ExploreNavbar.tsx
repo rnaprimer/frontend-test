@@ -26,6 +26,9 @@ export default function ExploreNavbar() {
 
   const handleExplore = () => {
     setActiveTab('explore');
+    setTimeout(() => {
+      router.push('/explore');
+    }, 250);
   };
 
   const handleJoinClub = () => {
