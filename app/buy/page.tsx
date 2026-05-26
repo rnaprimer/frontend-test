@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Script from 'next/script'
 import { createOrder, verifyPayment } from '@/services/api'
@@ -8,6 +8,13 @@ import ExploreNavbar from "@/components/explore/ExploreNavbar";
 
 export default function BuyPage() {
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [])
 
   const handlePayment = async () => {
     setLoading(true)
@@ -46,13 +53,13 @@ export default function BuyPage() {
   };
 
   return (
-    <main className="w-full h-[100dvh] bg-white flex flex-col md:flex-row items-center justify-center p-8 overflow-hidden">
+    <main className="w-full h-[100dvh] fixed inset-0 bg-white flex flex-col md:flex-row items-center justify-center p-8 overflow-hidden">
       <ExploreNavbar />
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
 
       {/* Left Side - Image Showcase */}
       <div className="flex-[1.2] lg:flex-[1.5] flex items-center justify-center w-full h-full p-4 relative">
-        <div className="relative w-[110%] md:w-[90%] max-w-[800px] aspect-square scale-[1.15] md:scale-100 lg:scale-100 mt-16 md:mt-0 -ml-[5%] md:ml-0">
+        <div className="relative w-[110%] md:w-[75%] lg:w-[60%] max-w-[450px] aspect-square scale-[1.15] md:scale-[0.95] lg:scale-[0.85] mt-16 md:mt-0 -ml-[5%] md:ml-0">
           <Image
             src="/buy.webp"
             alt="Potato Buy"
