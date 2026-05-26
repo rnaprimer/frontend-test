@@ -77,7 +77,7 @@ export default function BuyPage() {
           onClick={handlePayment}
           disabled={loading}
           className={`
-          relative group w-full max-w-full sm:max-w-[420px] py-4 sm:py-5
+          relative group w-full max-w-[260px] sm:max-w-[280px] px-8 sm:px-10 py-4 sm:py-5
             bg-[#b4ff29] border-[3px] border-black rounded-full
             text-black font-black text-sm sm:text-2xl tracking-widest
             shadow-[0px_6px_0px_0px_rgba(0,0,0,1)]
