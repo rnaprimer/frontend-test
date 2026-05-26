@@ -47,26 +47,26 @@ export default function BuyPage() {
   return (
     <main className="w-full min-h-[100dvh] bg-white flex flex-col md:flex-row items-center justify-center p-8 overflow-hidden">
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
-      
+
       {/* Left Side - Image Showcase */}
       <div className="flex-1 flex items-center justify-center w-full h-full p-4 relative">
         <div className="relative w-full max-w-[800px] aspect-[4/3] md:aspect-square">
-          <Image 
-            src="/buy.png" 
-            alt="Potato Buy" 
-            fill 
+          <Image
+            src="/buy.webp"
+            alt="Potato Buy"
+            fill
             sizes="(max-width: 768px) 100vw, 50vw"
             priority
-            className="object-contain" 
+            className="object-contain"
           />
         </div>
       </div>
 
       {/* Right Side - Buy Button */}
       <div className="flex-1 flex flex-col items-center justify-center p-4">
-        <button 
-          onClick={handlePayment} 
-          disabled={loading} 
+        <button
+          onClick={handlePayment}
+          disabled={loading}
           className={`
             relative group w-full max-w-[320px] sm:max-w-[400px] py-6 sm:py-8
             bg-[#b4ff29] border-[4px] border-black rounded-full
