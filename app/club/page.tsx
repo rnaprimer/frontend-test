@@ -71,7 +71,7 @@ export default function ClubPage() {
   }
 
   return (
-    <main className="w-full min-h-screen bg-white text-black relative flex flex-col overflow-x-hidden font-sans">
+    <main className="w-full min-h-screen bg-white text-black relative flex flex-col overflow-x-hidden pt-24 lg:pt-32">
       
       <ExploreNavbar />
 
