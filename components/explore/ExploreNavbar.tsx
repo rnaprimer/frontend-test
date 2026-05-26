@@ -1,12 +1,20 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 export default function ExploreNavbar() {
+  const pathname = usePathname();
   const [activeTab, setActiveTab] = useState<'goback' | 'explore' | 'joinclub' | 'buynow'>('explore');
   const router = useRouter();
+
+  useEffect(() => {
+    if (pathname === '/buy') setActiveTab('buynow');
+    else if (pathname === '/club') setActiveTab('joinclub');
+    else if (pathname === '/explore') setActiveTab('explore');
+    else setActiveTab('goback'); // or keep whatever if not matched
+  }, [pathname]);
 
   const handleGoBack = () => {
     setActiveTab('goback');

@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Script from 'next/script'
 import { createOrder, verifyPayment } from '@/services/api'
+import ExploreNavbar from "@/components/explore/ExploreNavbar";
 
 export default function BuyPage() {
   const [loading, setLoading] = useState(false)
@@ -46,6 +47,7 @@ export default function BuyPage() {
 
   return (
     <main className="w-full min-h-[100dvh] bg-white flex flex-col md:flex-row items-center justify-center p-8 overflow-hidden">
+      <ExploreNavbar />
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
 
       {/* Left Side - Image Showcase */}

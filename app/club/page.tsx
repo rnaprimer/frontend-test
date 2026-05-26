@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ArrowLeft, Check } from 'lucide-react'
+import ExploreNavbar from "@/components/explore/ExploreNavbar"
 
 // Custom Asterisk Logo SVG component
 function AsteriskLogo({ className = "w-10 h-10" }: { className?: string }) {
@@ -72,22 +73,7 @@ export default function ClubPage() {
   return (
     <main className="w-full min-h-screen bg-white text-black relative flex flex-col overflow-x-hidden font-sans">
       
-      {/* Top Header / Back Button */}
-      <header className="w-full px-6 md:px-12 py-6 flex items-center justify-between z-40">
-        <Link 
-          href="/" 
-          className="flex items-center gap-2 group text-sm md:text-base font-bold tracking-wider hover:opacity-75 transition-opacity"
-        >
-          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          <span>GO BACK</span>
-        </Link>
-        <Link 
-          href="/explore" 
-          className="text-sm md:text-base font-bold tracking-wider hover:opacity-75 transition-opacity"
-        >
-          EXPLORE
-        </Link>
-      </header>
+      <ExploreNavbar />
 
       {/* Grid Layout: Left image, Right interactive menu */}
       <div className="flex-1 w-full grid grid-cols-1 lg:grid-cols-2 max-w-7xl mx-auto px-6 md:px-12 pb-16 lg:pb-0 items-center gap-8 md:gap-16">
